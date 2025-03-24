@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ตะกร้า - YOURBOOK</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        .cart-item {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .cart-item-image {
+            width: 100px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 15px;
+        }
+
+        .cart-item-details {
+            flex-grow: 1;
+        }
+
+        .cart-item-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: #007bff;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-btn {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .quantity-input {
+            width: 50px;
+            text-align: center;
+            margin: 0 10px;
+        }
+
+        .delete-item-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: #dc3545;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .empty-cart-container {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .cart-image {
+            max-width: 250px;
+            margin-bottom: 20px;
+        }
+
+        .empty-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .empty-subtitle {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .go-shopping {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .checkout-button {
+            transition: background-color 0.3s ease;
+        }
+
+        .checkout-button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header4">
+        <div class="back-button" onclick="goBack()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5"></path>
+                <path d="M12 19l-7-7 7-7"></path>
+            </svg>
+        </div>
+        <h1>ตะกร้า</h1>
+    </header>
+    
+    <main id="cart-main" class="cart-container">
+        <div class="cart-items">
+            <div class="cart-item" data-book-id="doraemon1">
+                <button class="delete-item-btn">&times;</button>
+                <img src="images/doraemon.gif" alt="การ์ตูน Doraemon เล่ม 1" class="cart-item-image">
+                <div class="cart-item-details">
+                    <div class="cart-item-title">การ์ตูน Doraemon เล่ม 1</div>
+                    <div class="cart-item-price">฿ 95</div>
+                    <div class="cart-item-quantity">
+                        <button class="quantity-btn minus-btn">-</button>
+                        <input type="text" class="quantity-input" value="1" readonly>
+                        <button class="quantity-btn plus-btn">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="cart-footer">
+        <div class="total-price">ยอดรวม: 95 บาท</div>
+        <button class="checkout-button">ไปชำระเงิน</button>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartMain = document.getElementById('cart-main');
+            const cartItemsContainer = document.querySelector('.cart-items');
+            const totalPriceElement = document.querySelector('.total-price');
+            const checkoutButton = document.querySelector('.checkout-button');
+
+            // Go Back Function
+            function goBack() {
+                if (window.history.length > 1) {
+                    window.history.back();
+                } else {
+                    window.location.href = 'bookstore.html';
+                }
+            }
+
+            // Render Cart Items
+            function renderCartItems() {
+                const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+                // Clear existing content
+                cartItemsContainer.innerHTML = '';
+
+                // Check if cart is empty
+                if (cartItems.length === 0) {
+                    cartMain.innerHTML = `
+                        <div class="empty-cart-container">
+                            <img src="images/cartoon.png" alt="ตะกร้าว่าง" class="cart-image">
+                            <div class="empty-title">ยังไม่มีหนังสือในตะกร้า</div>
+                            <div class="empty-subtitle">คุณสามารถเลือกหนังสือที่คุณต้องการได้จากหน้าร้าน</div>
+                            <a href="bookstore.html" class="go-shopping">ไปหน้าร้าน</a>
+                        </div>
+                    `;
+                    
+                    totalPriceElement.textContent = 'ยอดรวม: 0 บาท';
+                    checkoutButton.disabled = true;
+                    return;
+                }
+
+                // Product details data
+                const productDetails = {
+                    'doraemon1': {
+                        title: 'การ์ตูน Doraemon เล่ม 1',
+                        image: 'images/doraemon.gif',
+                        price: 95
+                    }
+                };
+
+                let totalPrice = 0;
+                cartItems.forEach(item => {
+                    const product = productDetails[item.id];
+                    if (product) {
+                        const cartItemElement = document.createElement('div');
+                        cartItemElement.classList.add('cart-item');
+                        cartItemElement.setAttribute('data-book-id', item.id);
+                        
+                        cartItemElement.innerHTML = `
+                            <button class="delete-item-btn">&times;</button>
+                            <img src="${product.image}" alt="${product.title}" class="cart-item-image">
+                            <div class="cart-item-details">
+                                <div class="cart-item-title">${product.title}</div>
+                                <div class="cart-item-price">฿ ${product.price}</div>
+                                <div class="cart-item-quantity">
+                                    <button class="quantity-btn minus-btn">-</button>
+                                    <input type="text" class="quantity-input" value="${item.quantity}" readonly>
+                                    <button class="quantity-btn plus-btn">+</button>
+                                </div>
+                            </div>
+                        `;
+
+                        totalPrice += product.price * item.quantity;
+
+                        const deleteBtn = cartItemElement.querySelector('.delete-item-btn');
+                        deleteBtn.addEventListener('click', () => deleteCartItem(item.id));
+
+                        setupQuantityControls(cartItemElement);
+                        cartItemsContainer.appendChild(cartItemElement);
+                    }
+                });
+
+                // Check if cart is empty after rendering
+                if (cartItemsContainer.children.length === 0) {
+                    cartMain.innerHTML = `
+                        <div class="empty-cart-container">
+                            <img src="images/cartoon.png" alt="ตะกร้าว่าง" class="cart-image">
+                            <div class="empty-title">ยังไม่มีหนังสือในตะกร้า</div>
+                            <div class="empty-subtitle">คุณสามารถเลือกหนังสือที่คุณต้องการได้จากหน้าร้าน</div>
+                            <a href="bookstore.html" class="go-shopping">ไปหน้าร้าน</a>
+                        </div>
+                    `;
+                }
+
+                totalPriceElement.textContent = `ยอดรวม: ${totalPrice} บาท`;
+                checkoutButton.disabled = totalPrice === 0;
+            }
+
+            // Delete Item Function
+            function deleteCartItem(bookId) {
+                let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+                const updatedCartItems = cartItems.filter(item => item.id !== bookId);
+                localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+
+                // Re-render cart
+                renderCartItems();
+            }
+
+            // Quantity Adjustment
+            function setupQuantityControls(cartItem) {
+                const minusBtn = cartItem.querySelector('.minus-btn');
+                const plusBtn = cartItem.querySelector('.plus-btn');
+                const quantityInput = cartItem.querySelector('.quantity-input');
+                const bookId = cartItem.getAttribute('data-book-id');
+
+                minusBtn.addEventListener('click', () => {
+                    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+                    const itemIndex = cartItems.findIndex(item => item.id === bookId);
+                    
+                    if (itemIndex > -1) {
+                        if (cartItems[itemIndex].quantity > 1) {
+                            cartItems[itemIndex].quantity--;
+                            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                            renderCartItems();
+                        }
+                    }
+                });
+
+                plusBtn.addEventListener('click', () => {
+                    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+                    const itemIndex = cartItems.findIndex(item => item.id === bookId);
+                    
+                    if (itemIndex > -1) {
+                        cartItems[itemIndex].quantity++;
+                        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                        renderCartItems();
+                    }
+                });
+            }
+
+            // Checkout Handling
+            checkoutButton.addEventListener('click', () => {
+                const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+                if (cartItems.length > 0) {
+                    // Redirect to payment page
+                    window.location.href = 'payment.html';
+                }
+            });
+
+            // Initial render
+            renderCartItems();
+
+            // Go back function
+            function goBack() {
+                if (window.history.length > 1) {
+                    window.history.back();
+                } else {
+                    window.location.href = 'home.html';
+                }
+            }
+
+            // Back button event listeners
+            document.querySelector('.back-button').addEventListener('click', goBack);
+
+            // Keyboard back navigation
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Backspace' || event.key === 'Escape') {
+                    goBack();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

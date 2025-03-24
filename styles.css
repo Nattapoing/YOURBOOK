@@ -1,0 +1,1263 @@
+/* Base styles for all devices */
+.index-page {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* ใช้ min-height แทน height เพื่อรองรับเนื้อหาที่ยาว */
+    background: linear-gradient(to bottom, #53d2e9, #D6FFF9); /* สีพื้นหลังของหน้า index */
+    overflow-x: hidden; /* ป้องกันการเลื่อนแนวนอน */
+}
+
+/* กล่องหลัก */
+.container {
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    padding: clamp(15px, 5vw, 20px); /* ปรับขนาด padding ตามหน้าจอ */
+    border-radius: 15px;
+    box-shadow: none;
+    background: transparent;
+    margin: 20px 0; /* เพิ่ม margin เพื่อให้มีพื้นที่ด้านบนและล่าง */
+}
+
+/* ปุ่มติดต่อ */
+.contact {
+    text-align: left;
+    font-size: clamp(14px, 4vw, 17px); /* ปรับขนาดตามหน้าจอ */
+    margin-bottom: clamp(30px, 8vh, 50px); /* ปรับระยะห่างตามความสูงหน้าจอ */
+}
+
+/* โลโก้ */
+.logo img {
+    width: clamp(120px, 40vw, 170px); /* ปรับขนาดโลโก้ตามหน้าจอ */
+    height: auto; /* รักษาอัตราส่วน */
+    max-width: 100%; /* ป้องกันโลโก้ใหญ่เกินกล่อง */
+}
+
+/* หัวข้อ */
+h1 {
+    font-size: clamp(28px, 8vw, 40px); /* ปรับขนาดตามหน้าจอ */
+    margin: clamp(5px, 2vh, 10px);
+    line-height: 1.2; /* ปรับระยะห่างบรรทัด */
+}
+
+/* ปุ่ม */
+.btn {
+    width: 90%;
+    padding: clamp(12px, 4vh, 20px); /* ปรับขนาดตามความสูงหน้าจอ */
+    margin: clamp(6px, 2vh, 10px) 0;
+    border: none;
+    border-radius: 25px;
+    font-size: clamp(14px, 4vw, 16px); /* ปรับขนาดตามหน้าจอ */
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    display: inline-flex; /* เพื่อจัดการกับไอคอน */
+    justify-content: center;
+    align-items: center;
+}
+
+/* สไตล์ปุ่มต่างๆ */
+.yourbook { background: #53d2e9; }
+.facebook { background: #1877F2; }
+.line { background: #07b952; }
+.apple { background: black; }
+.google { 
+    background: white; 
+    color: black; 
+    border: 2px solid black; 
+}
+.create-account { 
+    background: white; 
+    color: rgb(67, 178, 206); 
+    border: 2px solid rgb(68, 175, 207); 
+}
+
+.guest {
+    margin-top: clamp(5px, 2vh, 10px);
+    font-size: clamp(12px, 3.5vw, 14px); /* ปรับขนาดตามหน้าจอ */
+    color: gray;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* ปรับไอคอนบนปุ่ม */
+.btn .btn-logo {
+    width: clamp(16px, 5vw, 20px); /* ปรับขนาดตามหน้าจอ */
+    height: auto; /* รักษาอัตราส่วน */
+    margin-right: clamp(5px, 2vw, 8px); /* ปรับระยะห่างตามหน้าจอ */
+}
+
+/* Modal */
+.modal {
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease;
+}
+
+.modal.show {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out, visibility 0s ease 0s;
+}
+
+.modal-content {
+    width: 85%; /* เพิ่มความกว้างสำหรับมือถือเล็ก */
+    max-width: 400px;
+    padding: clamp(15px, 5vw, 20px); /* ปรับขนาดตามหน้าจอ */
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-height: 80vh; /* ป้องกัน modal สูงเกินหน้าจอ */
+    overflow-y: auto; /* เพิ่ม scroll ถ้าเนื้อหายาวเกินไป */
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: clamp(18px, 5vw, 22px); /* ปรับขนาดตามหน้าจอ */
+}
+
+.close-btn {
+    font-size: clamp(18px, 5vw, 20px); /* ปรับขนาดตามหน้าจอ */
+    cursor: pointer;
+    color: #888;
+    padding: 5px; /* เพิ่มพื้นที่คลิก */
+}
+
+.close-btn:hover {
+    color: #000;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: clamp(15px, 4vh, 20px); /* ปรับขนาดตามความสูงหน้าจอ */
+}
+
+.later-btn, .accept-btn {
+    flex: 1;
+    margin: 5px;
+    padding: clamp(8px, 3vh, 15px) clamp(10px, 3vw, 15px); /* ปรับขนาดตามหน้าจอ */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: clamp(14px, 4vw, 16px); /* ปรับขนาดตามหน้าจอ */
+}
+
+.accept-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.later-btn {
+    background-color: gray;
+    color: white;
+}
+
+/* Media Queries สำหรับอุปกรณ์ขนาดต่างๆ */
+
+/* สำหรับมือถือขนาดเล็กที่สุด (320px) */
+@media (max-width: 320px) {
+    .container {
+        width: 95%;
+        padding: 10px;
+    }
+    
+    .btn {
+        width: 95%;
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    h1 {
+        font-size: 26px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        padding: 15px;
+    }
+}
+
+/* สำหรับมือถือขนาดเล็ก - กลาง */
+@media (min-width: 321px) and (max-width: 375px) {
+    .container {
+        width: 92%;
+    }
+    
+    .btn {
+        padding: 12px;
+    }
+}
+
+/* สำหรับมือถือความสูงน้อย */
+@media (max-height: 600px) {
+    .contact {
+        margin-bottom: 15px;
+    }
+    
+    .btn {
+        padding: 10px;
+        margin: 5px 0;
+    }
+    
+    .logo img {
+        width: 120px;
+    }
+}
+
+/* สำหรับอุปกรณ์ที่มีความสูงมาก */
+@media (min-height: 800px) {
+    .container {
+        margin: 30px 0;
+    }
+    
+    .contact {
+        margin-bottom: 40px;
+    }
+}
+
+/* สำหรับอุปกรณ์ Landscape mode (แนวนอน) */
+@media (orientation: landscape) and (max-height: 500px) {
+    body {
+        align-items: flex-start; /* ปรับให้เนื้อหาอยู่ด้านบน */
+    }
+    
+    .container {
+        padding: 10px;
+        margin: 10px 0;
+    }
+    
+    .contact {
+        margin-bottom: 10px;
+    }
+    
+    .btn {
+        padding: 8px;
+        margin: 4px 0;
+    }
+    
+    .logo img {
+        width: 100px;
+    }
+    
+    h1 {
+        margin: 5px;
+    }
+}
+.contact a {
+    text-decoration: none; /* ลบขีดเส้นใต้ */
+    color: inherit; /* ใช้สีตามปกติของข้อความ */
+}
+.contact-page {
+    background-color: white;
+    height: 800px;
+}
+
+/* แถบหัวข้อ */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right, #31c7eb, #71d5db);
+    padding: 15px;
+    color: white;
+    font-size: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* ปุ่มย้อนกลับ */
+.back-btn {
+    position: absolute;
+    left: 15px;
+    font-size: 24px;
+    text-decoration: none;
+    color: white;
+}
+
+/* จัดการเนื้อหาด้านล่าง */
+.content {
+    padding: 20px;
+}
+
+
+.help-text {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contact-item {
+    border-bottom: 1px solid #eee;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contact-item a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    width: 100%;
+}
+
+.arrow {
+    color: #ccc;
+}
+
+.contact-info {
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+.contact-info h3 {
+    margin-top: 0;
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.contact-info p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #666;
+}
+/* เพิ่มในไฟล์ styles.css */
+
+/* สไตล์หลักสำหรับหน้า home */
+body.home-page {
+    font-family: 'Kanit', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ส่วนหัว */
+header {
+    background: linear-gradient(to right, #00b8d4, #00e5ff);
+    padding: 15px;
+    color: #000;
+    top: 0; 
+    left: 0; 
+    right: 0;
+    z-index: 10; /* ให้ header อยู่ด้านบนเสมอ */
+     /* ระบุความสูงที่แน่นอน (ปรับตามขนาดจริงของ header) */
+}
+
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    
+}
+
+.header-content h1 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.tabs {
+    display: flex;
+    margin-top: 10px;
+}
+
+.tab {
+    padding: 5px 15px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+}
+
+.tab.active {
+    border-bottom: 2px solid #000;
+    font-weight: bold;
+}
+
+.search-bar {
+    display: flex;
+    background: white;
+    border-radius: 20px;
+    padding: 5px;
+    margin-top: 20px;
+}
+
+
+
+
+.search-input {
+    flex: 1;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 20px;
+    outline: none;
+}
+
+.filter-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+.filter-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+/* ส่วนเนื้อหาหลัก */
+main {
+    flex: 1;
+    padding: 15px;
+}
+
+.book-shelf h2 {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.count {
+    color: #888;
+    font-weight: normal;
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 130px; /* ให้มากกว่าความสูงของ header เล็กน้อย */
+}
+
+.empty-image {
+    margin-bottom: 15px;
+}
+
+.empty-image img {
+    width: 120px;
+    height: auto;
+}
+
+.empty-state h3 {
+    margin: 10px 0 5px;
+    font-size: 18px;
+}
+
+.empty-state p {
+    margin: 5px 0 15px;
+    color: #666;
+    font-size: 14px;
+}
+
+.add-link {
+    color: #00b8d4;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* ส่วนฟุตเตอร์และแถบนำทาง */
+footer {
+    background: white;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    background: white;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed; /* ล็อคตำแหน่งไว้ */
+    bottom: 0; /* ติดอยู่ด้านล่างของหน้าจอ */
+    left: 0; /* ติดด้านซ้าย */
+    right: 0; /* ติดด้านขวา */
+    width: 100%; /* กว้างเต็มจอ */
+    z-index: 1000; /* ให้อยู่ด้านบนสุดเสมอ */
+}
+
+
+
+/* เพิ่ม padding ล่างให้กับ body เพื่อไม่ให้เนื้อหาถูกแถบนำทางบัง */
+body.home-page {
+    font-family: 'Kanit', sans-serif;
+    margin: 0;
+    padding: 0 0 70px 0; /* เพิ่ม padding ด้านล่าง = ความสูงของ nav bar + padding */
+    background-color: #f5f5f5;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    font-size: 12px;
+    color: #888;
+    width: 25%;
+}
+
+.nav-item img {
+    width: 30px;
+    height: 24px;
+    margin-bottom: 5px;
+}
+
+.nav-item.active {
+    color: #00b8d4;
+}
+.empty-image img {
+    width: 17px;
+    height: auto;  
+}
+.empty-image {
+    margin-bottom: 15px;
+    width: 100%;
+    display: flex;
+    justify-content: center; /* จัดให้รูปอยู่ตรงกลางแนวนอน */
+}
+
+.empty-image img {
+    width: 40%; /* ขนาดเป็นเปอร์เซ็นต์ของความกว้างหน้าจอ */
+    max-width: 180px; /* ขนาดสูงสุดที่รูปจะขยายได้ */
+    min-width: 100px; /* ขนาดต่ำสุดที่รูปจะหดได้ */
+    height: auto; /* คงสัดส่วนภาพ */
+    object-fit: contain; /* ให้ภาพแสดงเต็มพื้นที่โดยไม่บิดเบี้ยว */
+}
+
+/* เพิ่ม media queries เพื่อปรับขนาดตามหน้าจอที่แตกต่างกัน */
+@media (max-width: 320px) {
+    /* สำหรับหน้าจอขนาดเล็กมาก เช่น iPhone SE */
+    .empty-image img {
+        width: 50%;
+        min-width: 80px;
+    }
+}
+
+@media (min-width: 321px) and (max-width: 375px) {
+    /* สำหรับหน้าจอขนาดเล็ก เช่น iPhone X/11 Pro */
+    .empty-image img {
+        width: 45%;
+    }
+}
+
+@media (min-width: 376px) and (max-width: 414px) {
+    /* สำหรับหน้าจอขนาดกลาง เช่น iPhone 8 Plus/11 */
+    .empty-image img {
+        width: 40%;
+    }
+}
+
+@media (min-width: 415px) and (max-width: 768px) {
+    /* สำหรับหน้าจอขนาดใหญ่ เช่น iPad Mini */
+    .empty-image img {
+        width: 35%;
+        max-width: 200px;
+    }
+}
+
+@media (min-width: 769px) {
+    /* สำหรับหน้าจอขนาดใหญ่มาก เช่น iPad Pro หรือแท็บเล็ตอื่นๆ */
+    .empty-image img {
+        width: 25%;
+        max-width: 220px;
+    }
+}
+
+/* ตั้งค่าพื้นฐาน */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Prompt', sans-serif;
+}
+
+
+/* ส่วนหัว */
+.header3 {
+    background-color: #38C7C7;
+    color: white;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.tabs {
+    display: flex;
+    gap: 20px;
+}
+
+.tab {
+    padding-bottom: 5px;
+    cursor: pointer;
+    position: relative;
+    opacity: 0.7;
+}
+
+.tab.active {
+    opacity: 1;
+    font-weight: bold;
+}
+
+.tab.active:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: white;
+}
+
+/* เนื้อหาหลัก */
+main {
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.filter-options {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 10px;
+    border-bottom: 1px solid #e0e0e0;
+    cursor: pointer;
+}
+
+.filter-text {
+    font-size: 16px;
+}
+
+.filter-count {
+    color: #888;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.add-btn, .edit-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #38C7C7;
+    background-color: transparent;
+}
+
+/* ส่วนท้าย */
+footer {
+    background-color: white;
+    padding: 10px 0;
+    box-shadow: 0 -2px 10px rgba(233, 7, 7, 0.1);
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: space-around;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    color: #888;
+    cursor: pointer;
+}
+
+.nav-item img {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 5px;
+}
+
+.nav-item.active {
+    color: #38C7C7;
+}
+/* สำหรับแถบเมนูในหน้าร้านหนังสือ */
+/* สไตล์สำหรับแท็บในหน้าร้านหนังสือ */
+.store-tabs {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 10px 0;
+    
+    
+    
+}
+
+.store-tab {
+    position: relative;
+    padding: 10px 10px;
+    cursor: pointer;
+    white-space: nowrap;
+    
+    
+}
+
+/* ขีดเส้นใต้แท็บที่เลือก */
+.store-tab.active {
+        border-bottom: 2px solid #000;
+        font-weight: bold;
+}
+
+.store-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: white;
+}
+
+/* เอฟเฟกต์เมื่อเมาส์ชี้ */
+.store-tab:hover::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #0056b3; /* สีเมื่อ hover - ปรับแต่งตามต้องการ */
+    border-radius: 1.5px;
+    opacity: 0.7;
+}
+
+/* หากคุณต้องการให้แท็บเลื่อนในกรณีที่มีหลายแท็บบนจอเล็ก */
+.store-header {
+    padding: 10px 15px;
+}
+.search-bar2 {
+    display: flex;
+    background: white;
+    border-radius: 20px;
+    padding: 5px;
+    margin-top: 12px;
+}
+/* ส่วนของ responsive grid layout */
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 15px;
+    padding: 0 15px;
+    margin-top: 15px;
+}
+
+/* ทำให้การ์ดปรับขนาดตามอุปกรณ์ */
+.book-card {
+    width: 105%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    
+    
+}
+
+/* ปรับขนาดรูปภาพให้รองรับทุกขนาดหน้าจอ */
+.book-image {
+    width: 100%;
+    aspect-ratio: 2/3; /* อัตราส่วนมาตรฐานของหนังสือ */
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.book-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ปรับข้อความให้รองรับการแสดงผลบนหน้าจอเล็ก */
+.book-info {
+    padding: 10px;
+    flex-grow: 1;
+}
+
+.book-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 14px;
+}
+
+/* ปรับขนาด Media Queries สำหรับอุปกรณ์ต่างๆ */
+@media (max-width: 768px) {
+    .book-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 12px;
+    }
+    
+    .book-title {
+        font-size: 13px;
+    }
+    
+    .rating {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .book-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 10px;
+    }
+    
+    .price-button {
+        padding: 4px 10px;
+        font-size: 12px;
+    }
+}
+
+/* สำหรับอุปกรณ์ขนาดใหญ่ */
+@media (min-width: 1024px) {
+    .book-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 20px;
+    }
+    
+    .book-title {
+        font-size: 16px;
+    }
+}
+.bookstore-page {
+    height: 00px;
+}
+.home-page {
+    height: 800px;
+}
+/* เพิ่มหรือแก้ไข CSS ในไฟล์ styles.css */
+.nav-bar {
+    border-top: none; /* ลบเส้นขอบด้านบนถ้ามี */
+  }
+  
+  .nav-item {
+    text-decoration: none; /* ลบขีดเส้นใต้ของลิงก์ */
+    border-top: none; /* ลบเส้นขอบด้านบน */
+    border-bottom: none; /* ลบเส้นขอบด้านล่าง */
+  }
+  
+  .nav-item.active {
+    border-top: none; /* ลบเส้นขอบด้านบนของเมนูที่เลือก */
+  }
+  
+  /* หากมีเส้นที่มาจากการใช้ box-shadow */
+  .nav-item, .nav-bar {
+    box-shadow: none;
+  }
+  
+  /* หากยังมีเส้นปรากฏ อาจเป็นเพราะมีเส้นขอบของภาพ */
+  .nav-item img {
+    border: none;
+    box-shadow: none;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Prompt', sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header3 {
+    background-color: #26D0CE;
+    color: #fff;
+    padding: 1rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.back-button {
+    cursor: pointer;
+    margin-right: 1rem;
+}
+
+.header3 h1 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    flex-grow: 1;
+    text-align: center;
+    margin-right: 1.5rem;
+}
+
+.empty-cart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: rem;
+    flex-grow: 1;
+    
+   
+}
+
+.cart-image {
+    width: 150px;
+    height: auto;
+    margin-bottom: 1rem;
+
+}
+
+.empty-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.empty-subtitle {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.8rem;
+}
+
+.go-shopping {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.cart-footer {
+    background-color: white;
+    padding: 1rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    bottom: 0;
+}
+
+.total-price {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.checkout-button {
+    background-color: #26D0CE;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.checkout-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* responsive design */
+@media (min-width: 768px) {
+    .empty-cart-container {
+        padding: 3rem;
+    }
+
+    .cart-image {
+        width: 120px;
+        height: 120px;
+    }
+
+    .empty-title {
+        font-size: 1.3rem;
+    }
+
+    .empty-subtitle {
+        font-size: 1rem;
+    }
+
+    .go-shopping {
+        font-size: 1rem;
+    }
+}
+.filter-page{
+    height: 500px;
+}
+/* Settings Page Styles */
+.settings-page header {
+    background-color: #12CDD4;
+    color: white;
+    padding: 15px;
+    position: relative;
+}
+
+.back-button {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.settings-content {
+    background-color: white;
+    margin-bottom: 60px; /* Space for footer */
+}
+
+.profile-section {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin-right: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-icon::before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    position: relative;
+}
+
+.user-icon::after {
+    content: "";
+    display: block;
+    width: 30px;
+    height: 15px;
+    background-color: white;
+    border-radius: 15px 15px 0 0;
+    position: absolute;
+    bottom: 8px;
+}
+
+.camera-icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #666;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.camera-icon::before {
+    content: "";
+    display: block;
+    width: 8px;
+    height: 8px;
+    border: 1px solid white;
+    border-radius: 50%;
+}
+
+.profile-info {
+    flex-grow: 1;
+}
+
+.profile-info .username {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.profile-info .phone {
+    color: #757575;
+    font-size: 14px;
+}
+
+.settings-item {
+    padding: 14px 16px;
+    border-bottom: 1px solid #e5e5e5;
+    display: flex;
+    align-items: center;
+}
+
+.settings-item a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    width: 100%;
+}
+
+.logout-button {
+    padding: 14px 16px;
+    text-align: center;
+    color: #FF3B30;
+    font-weight: bold;
+}
+
+.logout-button a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Responsive Design for Settings Page */
+@media screen and (min-width: 768px) {
+    .settings-content {
+        max-width: 500px;
+        margin: 0 auto 60px auto;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+}
+
+.book-detail-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.book-detail-content {
+    background-color: white;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.book-detail-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+    z-index: 10;
+}
+
+.book-detail-image {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 20px 0;
+}
+
+.book-detail-image img {
+    max-height: 100%;
+    max-width: 150px;
+    object-fit: contain;
+}
+
+.book-detail-info {
+    padding: 20px;
+}
+
+.book-detail-info h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #333;
+}
+
+.book-detail-rating {
+    color: #ffaa00;
+    margin-bottom: 15px;
+}
+
+.book-detail-author, .book-detail-publisher {
+    margin-bottom: 10px;
+}
+

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOURBOOK - หน้าหลัก</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="home-page">
+    <header>
+        <div class="header-content">
+            <h1>YOURBOOK</h1>
+            <div class="tabs">
+                <div class="tab active">ชั้นหนังสือ</div>
+                <div class="tab">กองหนังสือ</div>
+            </div>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="ค้นหาหนังสือ" class="search-input">
+            <img src="images/Filter.png" alt="กรอง">
+        </div>
+    </header>
+
+    <main>
+        <div class="book-shelf">
+            <h2>หนังสือทั้งหมดในชั้นหนังสือ <span class="count">(0 เล่ม)</span></h2>
+            
+            <div class="empty-state">
+                <div class="empty-image">
+                    <img src="images/thinking.png" alt="ไม่มีหนังสือ">
+                </div>
+                <h3>ยังไม่มีหนังสือ</h3>
+                <p>คุณสามารถเริ่มต้นเพิ่มหนังสือของคุณทันที</p>
+                <a href="bookstore.html" class="add-link">เริ่มต้นเลย</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="nav-bar">
+            <div class="nav-item active">
+                <img src="images/Book Shelf.png" alt="ชั้นหนังสือ">
+                <span>ชั้นหนังสือ</span>
+            </div>
+            <div class="nav-item">
+                <img src="images/Shop.png" alt="ร้านหนังสือ">
+                <span>ร้านหนังสือ</span>
+            </div>
+            <div class="nav-item" id="cart-nav">
+                <img src="images/Shopping Cart.png" alt="ตะกร้า">
+                <span>ตะกร้า</span>
+            </div>
+            <div class="nav-item">
+                <img src="images/Settings.png" alt="ตั้งค่า">
+                <span>ตั้งค่า</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

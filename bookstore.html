@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOURBOOK - ร้านหนังสือ</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Existing styles from previous version */
+        /* Product Details Overlay */
+        .product-details-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px 0;
+            
+        }
+
+        .product-details-card {
+            background: white;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .product-details-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .product-details-image {
+            width: 100%;
+            max-height: 600px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .product-details-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .product-details-section {
+            margin-bottom: 15px;
+        }
+
+        .product-details-section-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .product-details-description {
+            color: #666;
+        }
+
+        .product-details-price-btn {
+            display: block;
+            width: 150px;
+            margin: 15px auto;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .product-details-add-to-cart {
+            display: block;
+            width: 200px;
+            margin: 15px auto;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            text-align: center;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .product-details-info-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .product-details-info-list li {
+            margin-bottom: 5px;
+            color: #666;
+        }
+        .bookstore-page {
+            height: 800px;
+        }
+        
+    </style>
+</head>
+<body class="bookstore-page">
+    <header class="store-header">
+        <h1>ร้านหนังสือ</h1>
+        <div class="store-tabs">
+            <div class="store-tab active">ทั้งหมด</div>
+        </div>
+        <div class="search-bar2">
+            <input type="text" placeholder="ค้นหาหนังสือ" class="search-input">
+            <img src="images/Filter.png" alt="กรอง">
+        </div>
+    </header>
+
+    <main>
+        <div class="book-section">
+            <h2 class="section-title">หนังสือทั้งหมด</h2>
+            <div class="book-grid">
+                <div class="book-item" data-book-id="doraemon1">
+                    <div class="book-card">
+                        <div class="book-image">
+                            <img src="images/doraemon.gif" alt="การ์ตูน Doraemon เล่ม 1">
+                        </div>
+                        <div class="book-info">
+                            <div class="book-title">การ์ตูน Doraemon เล่ม 1</div>
+                            <div class="rating">
+                                ★★★★★
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Product Details Overlay -->
+    <div class="product-details-overlay">
+        <div class="product-details-card">
+            <span class="product-details-close">&times;</span>
+            <div class="product-details-content">
+                <!-- Content will be dynamically inserted -->
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="nav-bar">
+            <a href="home.html" class="nav-item">
+                <img src="images/Book Shelf2.png" alt="ชั้นหนังสือ">
+                <span>ชั้นหนังสือ</span>
+            </a>
+            <a href="bookstore.html" class="nav-item active">
+                <img src="images/Shop2.png" alt="ร้านหนังสือ">
+                <span>ร้านหนังสือ</span>
+            </a>
+            <a href="cart.html" class="nav-item">
+                <img src="images/Shopping Cart.png" alt="ตะกร้า">
+                <span>ตะกร้า</span>
+            </a>
+            <a href="setting.html" class="nav-item">
+                <img src="images/Settings.png" alt="ตั้งค่า">
+                <span>ตั้งค่า</span>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // Product details data
+        const productDetails = {
+            'doraemon1': {
+                title: 'การ์ตูน Doraemon เล่ม 1',
+                image: 'images/doraemon.gif',
+                basicInfo: {
+                    author: 'ฟุจิโกะ ฟุจิโอะ (Fujiko F. Fujio)',
+                    publisher: 'วิบูลย์กิจการพิมพ์',
+                    pages: 180,
+                    isbn: '978-616-xxx-xxx-x'
+                },
+                description: 'Doraemon เล่ม 1 เป็นจุดเริ่มต้นของการ์ตูนชุดคลาสสิกที่โด่งดังระดับโลก เล่มนี้จะแนะนำตัวละครหลักสองตัว คือ โนบิตะ หนุ่มวัยเรียนที่เรียนไม่เก่งและขี้ขลาด และ โดราเอมอน หุ่นยนต์แมวสีฟ้าที่เดินทางมาจากอนาคต',
+                review: 'หนังสือที่ทำให้เด็กๆ หลายรุ่นหลงรักโดราเอมอน ด้วยอุปกรณ์วิเศษและเรื่องราวที่น่าหัวเราะ',
+                additionalInfo: [
+                    'เหมาะสำหรับเด็กอายุ 6-12 ปี',
+                    'วางจำหน่ายครั้งแรกเมื่อ พ.ศ. 2525',
+                    'การ์ตูนชุดที่ได้รับความนิยมมากที่สุดในประเทศญี่ปุ่น'
+                ],
+                price: 95,
+                rating: '★★★★★'
+            }
+        };
+
+        // Get DOM elements
+        const bookItems = document.querySelectorAll('.book-item');
+        const productDetailsOverlay = document.querySelector('.product-details-overlay');
+        const productDetailsContent = document.querySelector('.product-details-content');
+        const productDetailsClose = document.querySelector('.product-details-close');
+
+        // Function to show product details
+        function showProductDetails(bookId) {
+            const product = productDetails[bookId];
+            if (product) {
+                productDetailsContent.innerHTML = `
+                    <img src="${product.image}" alt="${product.title}" class="product-details-image">
+                    
+                    <div class="product-details-section">
+                        <div class="product-details-title">${product.title}</div>
+                        <div class="rating">${product.rating}</div>
+                        <div class="product-details-price-btn">฿ ${product.price}</div>
+                        <div class="product-details-add-to-cart" data-book-id="${bookId}">เพิ่มลงตะกร้า</div>
+                    </div>
+
+                    <div class="product-details-section">
+                        <div class="product-details-section-title">ข้อมูลพื้นฐาน</div>
+                        <ul class="product-details-info-list">
+                            <li><strong>ผู้เขียน:</strong> ${product.basicInfo.author}</li>
+                            <li><strong>สำนักพิมพ์:</strong> ${product.basicInfo.publisher}</li>
+                            <li><strong>จำนวนหน้า:</strong> ${product.basicInfo.pages}</li>
+                            <li><strong>ISBN:</strong> ${product.basicInfo.isbn}</li>
+                        </ul>
+                    </div>
+
+                    <div class="product-details-section">
+                        <div class="product-details-section-title">คำอธิบาย</div>
+                        <div class="product-details-description">${product.description}</div>
+                    </div>
+
+                    <div class="product-details-section">
+                        <div class="product-details-section-title">รีวิว</div>
+                        <div class="product-details-description">"${product.review}"</div>
+                    </div>
+
+                    <div class="product-details-section">
+                        <div class="product-details-section-title">ข้อมูลเพิ่มเติม</div>
+                        <ul class="product-details-info-list">
+                            ${product.additionalInfo.map(info => `<li>• ${info}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+                productDetailsOverlay.style.display = 'flex';
+
+                // Add event listener for add to cart button
+                const priceButton = productDetailsContent.querySelector('.product-details-price-btn');
+        priceButton.addEventListener('click', () => {
+            window.location.href = 'payment.html';
+        });
+
+        // Add event listener for add to cart button
+        const addToCartBtn = productDetailsContent.querySelector('.product-details-add-to-cart');
+        addToCartBtn.addEventListener('click', addToCart);
+    }
+}
+
+        // Function to add item to cart
+        function addToCart(event) {
+            const bookId = event.target.getAttribute('data-book-id');
+            const product = productDetails[bookId];
+
+            // Get existing cart items from localStorage
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+            // Check if item is already in cart
+            const existingItemIndex = cartItems.findIndex(item => item.id === bookId);
+            if (existingItemIndex > -1) {
+                // Increment quantity if item exists
+                cartItems[existingItemIndex].quantity += 1;
+            } else {
+                // Add new item to cart
+                cartItems.push({
+                    id: bookId,
+                    title: product.title,
+                    price: product.price,
+                    quantity: 1
+                });
+            }
+
+            // Save updated cart to localStorage
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+
+            // Close product details
+            productDetailsOverlay.style.display = 'none';
+
+            // Optional: Show a notification that item was added to cart
+            alert('หนังสือถูกเพิ่มลงในตะกร้าแล้ว');
+        }
+
+        // Add click event to book items
+        bookItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const bookId = item.getAttribute('data-book-id');
+                showProductDetails(bookId);
+            });
+        });
+
+        // Close product details when clicking the close button
+        productDetailsClose.addEventListener('click', () => {
+            productDetailsOverlay.style.display = 'none';
+        });
+
+        // Close product details when clicking outside the card
+        productDetailsOverlay.addEventListener('click', (event) => {
+            if (event.target === productDetailsOverlay) {
+                productDetailsOverlay.style.display = 'none';
+            }
+        });
+        // Extend existing script with search functionality
+// Extend existing script with search functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.querySelector('.search-input');
+    const bookSection = document.querySelector('.book-section');
+    const bookGrid = document.querySelector('.book-grid');
+
+    // Existing product details object
+    const productDetails = {
+        'doraemon1': {
+            title: 'การ์ตูน Doraemon เล่ม 1',
+            image: 'images/doraemon.gif',
+            basicInfo: {
+                author: 'ฟุจิโกะ ฟุจิโอะ (Fujiko F. Fujio)',
+                publisher: 'วิบูลย์กิจการพิมพ์',
+                pages: 180,
+                isbn: '978-616-xxx-xxx-x'
+            },
+            description: 'Doraemon เล่ม 1 เป็นจุดเริ่มต้นของการ์ตูนชุดคลาสสิกที่โด่งดังระดับโลก เล่มนี้จะแนะนำตัวละครหลักสองตัว คือ โนบิตะ หนุ่มวัยเรียนที่เรียนไม่เก่งและขี้ขลาด และ โดราเอมอน หุ่นยนต์แมวสีฟ้าที่เดินทางมาจากอนาคต',
+            review: 'หนังสือที่ทำให้เด็กๆ หลายรุ่นหลงรักโดราเอมอน ด้วยอุปกรณ์วิเศษและเรื่องราวที่น่าหัวเราะ',
+            additionalInfo: [
+                'เหมาะสำหรับเด็กอายุ 6-12 ปี',
+                'วางจำหน่ายครั้งแรกเมื่อ พ.ศ. 2525',
+                'การ์ตูนชุดที่ได้รับความนิยมมากที่สุดในประเทศญี่ปุ่น'
+            ],
+            price: 95,
+            rating: '★★★★★'
+        }
+    };
+
+    // Function to create book item element
+    function createBookItem(bookId, bookData) {
+        // Check if the book item already exists to prevent duplicates
+        const existingBookItem = bookGrid.querySelector(`[data-book-id="${bookId}"]`);
+        if (existingBookItem) {
+            return null;
+        }
+
+        const bookItem = document.createElement('div');
+        bookItem.className = 'book-item';
+        bookItem.setAttribute('data-book-id', bookId);
+        
+        bookItem.innerHTML = `
+            <div class="book-card">
+                <div class="book-image">
+                    <img src="${bookData.image}" alt="${bookData.title}">
+                </div>
+                <div class="book-info">
+                    <div class="book-title">${bookData.title}</div>
+                    <div class="rating">
+                        ${bookData.rating}
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // Add click event to show product details
+        bookItem.addEventListener('click', () => {
+            showProductDetails(bookId);
+        });
+
+        return bookItem;
+    }
+
+    // Search functionality
+    function performSearch(query) {
+        // Clear existing books
+        bookGrid.innerHTML = '';
+
+        // Convert query to lowercase for case-insensitive search
+        query = query.toLowerCase();
+
+        // Search through productDetails
+        Object.entries(productDetails).forEach(([bookId, bookData]) => {
+            if (bookData.title.toLowerCase().includes(query)) {
+                const bookElement = createBookItem(bookId, bookData);
+                if (bookElement) {
+                    bookGrid.appendChild(bookElement);
+                }
+            }
+        });
+
+        // Update section title
+        const sectionTitle = bookSection.querySelector('.section-title');
+        sectionTitle.textContent = query ? `ผลการค้นหา: "${query}"` : 'หนังสือทั้งหมด';
+    }
+
+    // Add event listener to search input
+    searchInput.addEventListener('input', (event) => {
+        performSearch(event.target.value);
+    });
+
+    // Initial load of all books
+    Object.entries(productDetails).forEach(([bookId, bookData]) => {
+        const bookElement = createBookItem(bookId, bookData);
+        if (bookElement) {
+            bookGrid.appendChild(bookElement);
+        }
+    });
+});
+
+    </script>
+</body>
+</html>

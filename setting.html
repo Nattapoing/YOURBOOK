@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOURBOOK - ตั้งค่า</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="settings-page">
+    <header>
+        <div class="back-button" onclick="goBack()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5"></path>
+                <path d="M12 19l-7-7 7-7"></path>
+            </svg>
+            ตั้งค่า
+        </div>
+    </header>
+
+    <div class="settings-content">
+        <div class="profile-section">
+            <div class="profile-image">
+                <div class="avatar-placeholder">
+                    <i class="user-icon"></i>
+                </div>
+                <div class="camera-icon"></div>
+            </div>
+            <div class="profile-info">
+                <div class="username">User</div>
+                <div class="phone">ชื่อผู้ใช้งาน</div>
+            </div>
+        </div>
+        
+        <div class="settings-item">
+            <a href="#facebook">เชื่อมต่อกับ Facebook</a>
+        </div>
+        
+        <div class="settings-item">
+            <a href="#line">เชื่อมต่อกับ LINE</a>
+        </div>
+        
+        <div class="settings-item">
+            <a href="#apple">เชื่อมต่อกับ Apple</a>
+        </div>
+        
+        <div class="settings-item">
+            <a href="#google">เชื่อมต่อกับ Google</a>
+        </div>
+        
+        <div class="settings-item">
+            <a href="#yourbook">เชื่อมต่อกับบัญชี YOURBOOK</a>
+        </div>
+        
+        <div class="settings-item">
+            <a href="#edit-profile">แก้ไขข้อมูลส่วนตัว</a>
+        </div>
+        
+        <div class="settings-item">
+            <a href="#change-password">เปลี่ยนรหัสผ่าน</a>
+        </div>
+        
+        <div class="settings-item">
+            <a href="#notifications">การตั้งค่าแจ้งเตือน</a>
+        </div>
+        
+        <div class="logout-button">
+            <a href="index.html">ออกจากระบบ</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="nav-bar">
+            <a href="home.html" class="nav-item">
+                <img src="images/Book Shelf2.png" alt="ชั้นหนังสือ">
+                <span>ชั้นหนังสือ</span>
+            </a>
+            <a href="bookstore.html" class="nav-item">
+                <img src="images/Shop.png" alt="ร้านหนังสือ">
+                <span>ร้านหนังสือ</span>
+            </a>
+            <a href="cart.html" class="nav-item">
+                <img src="images/Shopping Cart.png" alt="ตะกร้า">
+                <span>ตะกร้า</span>
+            </a>
+            <a href="setting.html" class="nav-item active">
+                <img src="images/Settings2.png" alt="ตั้งค่า">
+                <span>ตั้งค่า</span>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        function goBack() {
+            // If there's a previous page in history, go back
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                // If no previous page, redirect to home
+                window.location.href = 'home.html';
+            }
+        }
+
+        // Optional: Add keyboard support for back navigation
+        document.addEventListener('keydown', function(event) {
+            // Add support for Backspace or Escape key to go back
+            if (event.key === 'Backspace' || event.key === 'Escape') {
+                goBack();
+            }
+        });
+    </script>
+</body>
+</html>
